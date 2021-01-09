@@ -1,0 +1,31 @@
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+
+html{
+    min-height: 100%;
+    position: relative;
+}
+
+body{
+    background-color: #252732;
+    color: #fff;
+}
+
+.main-wrapper{
+    margin-bottom: 85px;
+}
+
+.header-menu .nav-link{
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+@media(min-width: 1200px){
+    .container{
+        max-width: 1200px;
+    }
+}
