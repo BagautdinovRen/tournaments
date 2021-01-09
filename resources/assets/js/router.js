@@ -9,7 +9,9 @@ import Login from './views/Login';
 import Register from './views/Register';
 import TournamentList from './views/TournamentList';
 import Tournament from './views/Tournament';
+import PlayerList from './views/PlayerList';
 import Player from './views/Player';
+import ClassList from './views/ClassList';
 
 const routes = [
     {
@@ -37,8 +39,16 @@ const routes = [
                 component: Tournament
             },
             {
-                path: '/player/:id',
+                path: '/players',
+                component: PlayerList
+            },
+            {
+                path: '/players/:id',
                 component: Player
+            },
+            {
+                path: '/classes',
+                component: ClassList
             },
         ]
     },

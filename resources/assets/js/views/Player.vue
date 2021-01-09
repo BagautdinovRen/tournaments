@@ -4,7 +4,10 @@
         <div v-else-if="!not_found">
             <h1>{{ player.name }}</h1>
             <p class="uk-text-lead">{{ player.country.name }}</p>
-            <p class="uk-text-lead">{{ player.class_character.name }}</p>
+            <p>
+                <span>{{ player.class_character.name }}</span>
+                <img :src="'/storage/' + player.class_character.logo" alt="player.country.name">
+            </p>
             <p class="uk-text-lead">{{ player.tournaments[0].name }}</p>
             <p class="uk-text-lead">Побед: {{ player.countWinDuels }}</p>
             <p class="uk-text-lead">Поражений: {{ player.countLoseDuels }}</p>
@@ -34,7 +37,7 @@ export default {
     },
     methods: {
         loadPlayer(id) {
-            axios.get('/api/player/' + id)
+            axios.get('/api/players/' + id)
                 .then(res => {
                     this.player = res.data;
                     this.loading = false;

@@ -48,11 +48,11 @@ export default {
                 },
                 {
                     title: 'Участники',
-                    href: '/player/2'
+                    href: '/players'
                 },
                 {
                     title: 'Классы',
-                    href: '/player/2'
+                    href: '/classes'
                 },
             ],
             profileLinks: [

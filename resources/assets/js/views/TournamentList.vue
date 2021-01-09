@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 <tr v-for="tournament in tournaments">
-                    <td>
+                    <td class="tournament-name">
                         <router-link :to="'/tournaments/' + tournament.id">{{ tournament.name }}</router-link>
                     </td>
                     <td>{{ tournament.start_at }}</td>
@@ -82,5 +82,19 @@ export default {
 
     .table tbody tr:nth-child(odd){
         background-color: #2a2d3a;
+    }
+
+    .table a{
+        color: #fff;
+    }
+
+    .table a:hover{
+        color: #43adfa;
+        text-decoration: none;
+    }
+
+    .tournament-name{
+        font-size: 16px;
+        font-weight: 600;
     }
 </style>

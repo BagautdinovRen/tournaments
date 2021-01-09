@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace(App\Http\Controllers\Api\Front::class)->group(function() {
-    Route::get('player/{player}', 'PlayerController@show')->name('front.player.id');
+    Route::get('players/{player}', 'PlayerController@show')->name('front.player.show');
+    Route::get('players', 'PlayerController@index')->name('front.player.index');
+
     Route::get('tournaments/{tournament}', 'TournamentController@show')->name('front.tournament.show');
     Route::get('tournaments', 'TournamentController@index')->name('front.tournament.index');
+
+    Route::get('classes', 'CharacterClassController@index')->name('front.class.index');
 });
 
 /*
