@@ -12,7 +12,7 @@ Vue.prototype.trans = window.trans;
 const app = new Vue({
     el: '#app',
     data: {
-
+        test: 'hello'
     },
     router
 });

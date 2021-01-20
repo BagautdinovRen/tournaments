@@ -12,6 +12,7 @@ import Tournament from './views/Tournament';
 import PlayerList from './views/PlayerList';
 import Player from './views/Player';
 import ClassList from './views/ClassList';
+import Error404 from './views/404';
 
 const routes = [
     {
@@ -50,12 +51,25 @@ const routes = [
                 path: '/classes',
                 component: ClassList
             },
+            {
+                path: '*',
+                component: Error404
+            },
         ]
     },
 
 ];
 
-export default new vueRouter({
+const router = new vueRouter({
     mode: 'history',
     routes
 });
+
+router.beforeEach(async (to, from, next) => {
+    const components = await router.getMatchedComponents({ ...to })
+    console.log(components);
+    console.log(to);
+    next();
+});
+
+export default router;

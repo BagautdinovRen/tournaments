@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CharacterClassController extends Controller
 {
-    public function index()
+    public function index(): string
     {
         $classes = ClassCharacter::all();
 

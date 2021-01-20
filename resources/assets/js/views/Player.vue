@@ -8,7 +8,8 @@
                 <span>{{ player.class_character.name }}</span>
                 <img :src="'/storage/' + player.class_character.logo" alt="player.country.name">
             </p>
-            <p class="uk-text-lead">{{ player.tournaments[0].name }}</p>
+
+            <p class="uk-text-lead" v-if="player.tournaments.length">{{ player.tournaments[0].name }}</p>
             <p class="uk-text-lead">Побед: {{ player.countWinDuels }}</p>
             <p class="uk-text-lead">Поражений: {{ player.countLoseDuels }}</p>
         </div>
@@ -34,6 +35,7 @@ export default {
     }),
     mounted() {
         this.loadPlayer(this.$route.params.id);
+        console.log(this.$route.app);
     },
     methods: {
         loadPlayer(id) {

@@ -9,21 +9,26 @@ use App\Models\Duel;
 
 class PlayerController extends Controller
 {
-    public function index()
+    public function index(): string
     {
-        $players = Player::with('country', 'tournaments', 'classCharacter')->get();
+        $players = Player::with('country', 'tournaments', 'classCharacter')->orderBy('name')->get();
         //$player['countWinDuels'] = Duel::where('winner', $player['id'])->count();
         //$player['countLoseDuels'] = Duel::where('loser', $player['id'])->count();
 
         return $players->toJson();
     }
 
-    public function show($id)
+    public function show($id): string
     {
         $player = Player::with('country', 'tournaments', 'classCharacter')->findOrFail($id);
         $player['countWinDuels'] = Duel::where('winner', $player['id'])->count();
         $player['countLoseDuels'] = Duel::where('loser', $player['id'])->count();
 
         return $player->toJson();
+    }
+
+    public function getHello(): string
+    {
+        return 'hello';
     }
 }

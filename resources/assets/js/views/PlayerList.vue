@@ -1,13 +1,13 @@
 <template>
     <div>
         <spinner v-if="loading"/>
-        <table class="table" v-else-if="!emptyTournaments">
+        <table class="table" v-else-if="!emptyPlayers">
             <thead>
             <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Страна</th>
-                <th scope="col">Класс</th>
-                <th scope="col">Возраст</th>
+                <th scope="col" @click="sortPlayers('name')">Имя</th>
+                <th scope="col" @click="sortPlayers('country.name')">Страна</th>
+                <th scope="col" @click="sortPlayers('class_character.name')">Класс</th>
+                <th scope="col" @click="sortPlayers('age')">Возраст</th>
             </tr>
             </thead>
             <tbody>
@@ -41,7 +41,9 @@ export default {
         return {
             players: [],
             loading: true,
-            emptyTournaments: false,
+            emptyPlayers: false,
+            curSortType: 'name',
+            curSortOrder: 'asc'
         }
     },
     mounted() {
@@ -57,6 +59,59 @@ export default {
                 .catch(err => {
                     this.emptyPlayers = true;
                 })
+        },
+        sortPlayers(key) {
+            let order = 'asc';
+
+            if (key === this.curSortType)
+                order = this.curSortOrder === 'asc' ? 'desc' : 'asc';
+
+            this.players.sort(this.compareByProp(key, order));
+        },
+        compareByProp(key, order = 'asc') {
+            this.curSortType = key;
+            this.curSortOrder = order;
+
+            return function innerSort(a, b) {
+                let varA, varB;
+
+                if (key.indexOf('.') !== -1)
+                {
+                    let keys = key.split('.');
+                    let firstKey = keys.shift();
+
+                    varA = a[firstKey];
+                    varB = b[firstKey];
+
+                    for (const curKey of keys) {
+                        varA = varA[curKey];
+                        varB = varB[curKey];
+                    }
+
+                    varA = (typeof varA === 'string') ? varA.toUpperCase() : varA;
+                    varB = (typeof varB === 'string') ? varB.toUpperCase() : varB;
+                }
+                else
+                {
+                    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key))
+                        return 0;
+
+                    varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
+                    varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
+                }
+
+
+                let comparison = 0;
+
+                if (varA > varB)
+                    comparison = 1;
+                else if (varA < varB)
+                    comparison = -1;
+
+                return (
+                    (order === 'desc') ? (comparison * -1) : comparison
+                );
+            };
         }
     },
 }
@@ -71,6 +126,7 @@ export default {
     color: rgba(255, 255, 255, 0.5);
     font-size: 13px;
     border: none;
+    cursor: pointer;
 }
 
 .table thead tr {

@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 
 class TournamentController extends Controller
 {
-    public function index()
+    public function index(): string
     {
         $tournaments = Tournament::all();
 
         return $tournaments->toJson();
     }
 
-    public function show($id)
+    public function show($id): string
     {
         $tournament = Tournament::with('players')->findOrFail($id);
 
