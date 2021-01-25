@@ -35,7 +35,6 @@ export default {
     }),
     mounted() {
         this.loadPlayer(this.$route.params.id);
-        console.log(this.$route.app);
     },
     methods: {
         loadPlayer(id) {
