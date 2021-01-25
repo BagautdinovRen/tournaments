@@ -65,11 +65,4 @@ const router = new vueRouter({
     routes
 });
 
-router.beforeEach(async (to, from, next) => {
-    const components = await router.getMatchedComponents({ ...to })
-    console.log(components);
-    console.log(to);
-    next();
-});
-
 export default router;
